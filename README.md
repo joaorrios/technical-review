@@ -56,6 +56,19 @@ The reviewer receives the artifact and coordinates needed to investigate the rea
 
 Written requirements and prior technical decisions are evidence of intent, not authority over technical correctness. A review may therefore identify a defect even when the artifact faithfully follows what was written.
 
+## Versioning
+
+Technical Review follows Semantic Versioning for the package as a whole. The initial release line starts at `0.1.0` while the review contracts are still settling.
+
+Changesets records the intended bump for future changes:
+
+```bash
+npm run changeset
+npm run version
+```
+
+Release tags use `vMAJOR.MINOR.PATCH`. Versioning is independent from installation: `npx skills` installs and updates the skills from the repository, while SemVer tags and releases identify published package states.
+
 ## License
 
 MIT
