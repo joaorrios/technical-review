@@ -1,0 +1,19 @@
+{
+  "name": "technical-review",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable independent technical review skills for coding agents",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joaorrios/technical-review"
+  },
+  "license": "MIT",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.30.0"
+  }
+}
