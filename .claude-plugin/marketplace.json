@@ -1,0 +1,13 @@
+{
+  "name": "technical-review",
+  "owner": {
+    "name": "João Rios"
+  },
+  "plugins": [
+    {
+      "name": "technical-review",
+      "source": "./",
+      "description": "Independent technical approach and implementation reviews."
+    }
+  ]
+}
