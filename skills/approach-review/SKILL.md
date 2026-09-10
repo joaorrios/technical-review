@@ -13,11 +13,11 @@ Review the technical approach through an independent context before implementati
 
 You are the **approach author**. Do not perform the review yourself.
 
-Dispatch an independent reviewer with strong software-reasoning capability. Prefer a different model family from the author when a comparably capable one is available. If the runtime exposes the installed `approach-reviewer`, use it. Otherwise dispatch a fresh isolated subagent and give it `reviewer.md` as its reviewer instructions.
+Dispatch a fresh isolated subagent with strong software-reasoning capability and use `agents/reviewer.md` as its reviewer instructions. Prefer a different model family from the author when a comparably capable one is available. Keep the reviewer read-only when the runtime supports that boundary.
 
 Keep the briefing unprimed. Give the reviewer the proposed approach, its repository or worktree, and enough coordinates to inspect the real system. Let the artifact speak for itself: keep the author's rationale, suspected weaknesses, defenses, and expected conclusions out of the briefing.
 
-The reviewer owns investigation. It may inspect code, configuration, interfaces, dependencies, conventions, and runtime behavior as needed.
+The reviewer owns investigation and may inspect the surrounding system as needed.
 
 ## Resolve
 
