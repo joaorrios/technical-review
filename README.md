@@ -1,5 +1,8 @@
-# Technical Review
+# Agent Skills
 
+
+
+# Technical Reviews
 Two independent technical review workflows for coding agents:
 
 - **approach-review** — challenges a proposed technical approach before implementation.
