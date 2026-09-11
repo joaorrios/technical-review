@@ -51,6 +51,8 @@ When removing a block, do not preserve its meaning in a softer reminder "just in
 
 When replacing a block, make the replacement more direct than the original. Prefer positive targets over lists of forbidden behavior. Prefer one strong concept over several synonymous reminders.
 
+**Keep the current state, cut the history of the change.** The artifact should directly reflect what is intended now, not narrate the change or negate what came before. Keep pointers only where people would still reasonably look for that information; historical proximity alone is not enough.
+
 A removed block earns restoration only when you can name a concrete failure its absence would cause and point to evidence for that failure. Archival loss by itself is not a defect.
 
 ## 4. Follow dependency death
