@@ -7,11 +7,11 @@ compatibility: Self-contained. Requires only access to inspect and edit the targ
 
 # Unhobble
 
-Remove legacy restrictions that limit a capable model without still earning that restriction.
+Remove legacy instructions that over-constrain a capable model without still earning that restriction.
 
-To **hobble** an AI is to deliberately restrict its capabilities, judgment, autonomy, or available ways of acting. Some hobbles are real boundaries; others are scaffolding written around weaknesses the current model no longer needs. This skill targets the second kind in agent-facing instruction surfaces.
+A **hobble** is instruction that once helped weaker models perform reliably, but now gets in the way of stronger models by over-constraining their judgment or capabilities.
 
-The test is behavioral: **does this restriction still prevent a concrete failure or enforce a real constraint?** If not, it is load without leverage.
+Not every constraint is a hobble. Keep real requirements, safety boundaries, environmental limits, product facts, and non-obvious gotchas. The test is behavioral: **does this restriction still prevent a concrete failure or enforce a real constraint?** If not, it is load without leverage.
 
 Use `/unhobble` for the relevant instruction surfaces in the current task, or `/unhobble <path or artifacts>` to target specific material. Natural-language scope is fine: `please /unhobble my global Claude rules`.
 
