@@ -1,15 +1,19 @@
 ---
-name: unhobbling
-description: Use when an agent-facing instruction surface has accumulated rigid steps, duplicated rules, stale workarounds, repeated reminders, interface-teaching examples, or other scaffolding written for weaker models.
+name: unhobble
+description: Use when an agent-facing instruction surface constrains a capable model with rigid steps, duplicated rules, stale workarounds, repeated reminders, interface-teaching examples, or other legacy scaffolding.
 license: MIT
 compatibility: Self-contained. Requires only access to inspect and edit the target instruction surfaces.
 ---
 
-# Unhobbling
+# Unhobble
 
-Remove instruction scaffolding that no longer changes behavior, while preserving the constraints and structure that still do.
+Remove legacy instructions that over-constrain a capable model without still earning that restriction.
 
-A **hobble** is instruction text that compensates for a model weakness instead of expressing the real requirement. The test is behavioral: **would removing this change the agent's behavior in a way that matters?** If not, it is load without leverage.
+A **hobble** is instruction that once helped weaker models perform reliably, but now gets in the way of stronger models by over-constraining their judgment or capabilities.
+
+Not every constraint is a hobble. Keep real requirements, safety boundaries, environmental limits, product facts, and non-obvious gotchas. The test is behavioral: **does this restriction still prevent a concrete failure or enforce a real constraint?** If not, it is load without leverage.
+
+Use `/unhobble` for the relevant instruction surfaces in the current task, or `/unhobble <path or artifacts>` to target specific material. Natural-language scope is fine: `please /unhobble my global Claude rules`.
 
 Unhobbling has two moves:
 
