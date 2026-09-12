@@ -1,95 +1,81 @@
 ---
 name: unhobble
-description: Use when an agent-facing instruction surface constrains a capable model with rigid steps, duplicated rules, stale workarounds, repeated reminders, interface-teaching examples, or other legacy scaffolding.
+description: Updates and simplifies context engineering for new, stronger models. Removes bloat, excessive constraints, repetitive exposition, instruction conflicts, and attention hogs.
+argument-hint: "[path or artifacts]"
 license: MIT
-compatibility: Self-contained. Requires only access to inspect and edit the target instruction surfaces.
+compatibility: Requires file access and a separate reviewer who has not taken part in the rewrite.
 ---
 
 # Unhobble
 
-Remove legacy instructions that over-constrain a capable model without still earning that restriction.
+Rewrite the instructions to express what the user wants clearly and let the model use its judgment. Preserve the facts and constraints it needs to do the work.
 
-A **hobble** is instruction that once helped weaker models perform reliably, but now gets in the way of stronger models by over-constraining their judgment or capabilities.
+## 1. Recover the current intent
 
-Not every constraint is a hobble. Keep real requirements, safety boundaries, environmental limits, product facts, and non-obvious gotchas. The test is behavioral: **does this restriction still prevent a concrete failure or enforce a real constraint?** If not, it is load without leverage.
+Identify what the user wants the instructions to achieve, and what facts and constraints the model needs to act on that intent.
 
-Use `/unhobble` for the relevant instruction surfaces in the current task, or `/unhobble <path or artifacts>` to target specific material. Natural-language scope is fine: `please /unhobble my global Claude rules`.
+Read each target in full. Check related documents and authoritative sources for current facts and requirements. Treat the existing text as evidence; some of it may be out of date. Use the user's current direction to resolve conflicts with older instructions.
 
-Unhobbling has two moves:
+Present your understanding to the user, with the sources that support it and any questions that affect the rewrite.
 
-- **Cut** scaffolding that no longer earns its place.
-- **Add** the smaller thing it was standing in for when something real would otherwise be lost: a clear goal, an expressive interface, a rubric, a runnable check, or one authoritative definition.
+This step is complete when the user agrees with that understanding and those questions are resolved.
 
-Do both. Pure deletion can remove useful structure; pure addition creates sediment.
+## 2. Assess the existing material
 
-## 1. Read the whole surface
+Use the agreed intent and necessary context to decide what to do with the material. Assess it at the level where a change is needed, from a single rule to multiple documents.
 
-Treat one instruction surface as the unit of work: a skill, agent file, instruction file, hook message, output style, or similar artifact.
+Auditable decisions:
 
-Read it end to end before editing. Then search the surrounding repository for other carriers of the same meaning. A rule repeated in four places is one decision, applied to all four.
+- **Keep** — the content is needed and already expresses the intent or context clearly.
+- **Cut** — the content is no longer needed or leads the model away from what the user wants.
+- **Reshape** — the content is needed, but its wording, form, or location should change.
+- **Add** — needed guidance or context is missing from the available sources.
+- **Clarify** — more information is needed to decide what to do with the content.
 
-Prefer live sources over prose caches. If config, schemas, tool help, directory structure, or executable checks already reveal a fact cheaply, documentation usually should not restate it.
+Principles:
 
-## 2. Classify what you find
+- **Judgment** — Trust capable models to use good judgment. Trying to control every decision can make their reasoning worse. Give them clear goals, relevant context, and real constraints, then let them decide how to act.
+- **Attention** — What you include, repeat, or explain at length directs the model’s attention. Keep Chekhov’s gun effect in mind when choosing what to include and emphasize. Remove explanations of things the model already knows and details that give a concern or solution more weight than the user’s intent calls for.
+- **Exploration** — Examples that teach the model how to act, or list possible places to look, can draw its attention away from cases that were not shown. Replace them with a clear goal, the full scope, and a clear condition for completion. Let the model work out which cases matter.
+- **Useful guidance** — ask whether the model would already do what the user wants without the instruction. If so, remove it. If you are unsure and the answer would change your decision, try the same task with and without it and compare the results.
+- **Interface** — Make tools clear through their names, inputs, affordances and constraints, so the model can work out how to use them without enumerating use cases.
+- **Disclosure** — keep shared guidance in the main document. Put details needed only in certain cases behind a link that says what they cover and when to read them.
+- **Single source** — state each rule or fact in one place. Link to it from other places where the model needs it.
+- **Right place** — Remove prose that repeats what the artifacts already make clear. Use prose for what they cannot express well on their own.
 
-Use these transformations:
+Give a reason for each decision. Resolve questions that affect the rewrite. Confirm changes to the agreed intent with the user.
 
-| Signal | Better shape |
-|---|---|
-| Rules pre-decide cases the model can judge from context | State the goal and only the non-obvious constraint |
-| Examples mainly teach a call shape | Improve the interface or parameter names |
-| Material matters only on one branch | Move it behind that branch or remove it from the always-read path |
-| The same meaning appears repeatedly | Keep one authoritative carrier |
-| Prose mirrors machine-readable state | Read the source directly |
-| Prose describes a standard that can be checked | Prefer a rubric, test, schema, or runnable check |
-| Workaround targets a failure mode that no longer occurs | Remove it |
-| Sentence restates default competent behavior | Remove it |
+This step is complete when every part of the material has been assessed, each decision has a reason, each **Clarify** has been resolved, and missing guidance or context has been identified.
 
-Keep real environmental constraints, product facts, non-obvious gotchas, and hard safety boundaries.
+## 3. Rewrite the material
 
-## 3. Rewrite removal-first
+Rewrite the material to express that intent clearly. Apply the decisions from step 2 and make the needed context available where the model will use it.
 
-For each block, decide **keep, replace, or remove**.
+**Write the current state** — State the current rules and facts directly. Cut narration of changes or negations about what came before. If nothing in a document is still needed, remove it.
 
-When removing a block, do not preserve its meaning in a softer reminder "just in case." That is the same carrier with worse clarity.
+This step is complete when every **Keep**, **Cut**, **Reshape**, and **Add** decision has been applied.
 
-When replacing a block, make the replacement more direct than the original. Prefer positive targets over lists of forbidden behavior. Prefer one strong concept over several synonymous reminders.
+## 4. Update related material
 
-**Keep the current state, cut the history of the change.** The artifact should directly reflect what is intended now, not narrate the change or negate what came before. Keep pointers only where people would still reasonably look for that information; historical proximity alone is not enough.
+Find everything affected by the changes. Update or remove the affected parts so they agree with the rewritten material. Historical and archived records may keep their outdated mentions.
 
-A removed block earns restoration only when you can name a concrete failure its absence would cause and point to evidence for that failure. Archival loss by itself is not a defect.
+This step is complete when all affected material still in use reflects the current instructions, and links to moved or added content work and state when to read it.
 
-## 4. Follow dependency death
+## 5. Review the result
 
-A cut often leaves artifacts that only existed to support it. Remove or repair them in the same pass:
+Use a separate reviewer who has not taken part in the rewrite. Give them the user's agreed goals, preferences, facts, and constraints; the relevant sources; and the material before and after the changes. Let them reach their own conclusions.
 
-- pointers to deleted sections;
-- duplicated reminders elsewhere;
-- hooks or gates whose messages teach a rule that no longer exists;
-- tests or fixtures pinned to removed wording rather than behavior;
-- docs that describe the old behavior as current.
+Ask the reviewer to check whether step 1 missed anything and whether the result does what the user wants. All needed facts and constraints must be available to the model through the instructions, tools, or other sources. Keep your own analysis, preferred solution, and unrelated workspace material out of that context.
 
-Historical records may remain historical. Instructional surfaces must describe the system that exists now.
+Check for failure modes:
 
-## 5. Review the delta
+- **Under-cut** — unnecessary rules, repetition, or unintended framing remain.
+- **Over-cut** — a removal loses guidance or context the model still needs.
+- **Wrong shape** — needed content is misleading, hard to find, or in the wrong place or form.
+- **Missing** — a goal, preference, fact, or constraint was overlooked or is still unsupported.
 
-Inspect the result against four failure modes:
+Judge by what the model needs now. Earlier presence alone is no reason to restore a passage.
 
-1. **Under-cut** — scaffolding survived without behavioral value.
-2. **Over-cut** — a removal creates a concrete failure.
-3. **Wrong shape** — the replacement is less expressive or changes the requirement.
-4. **Missing add** — deletion exposed a real gap that needs a smaller interface, rubric, check, or definition.
+After the reviewer's first assessment, compare the findings with the reasons recorded in step 2. Address each finding or explain why you disagree. Confirm changes to the agreed intent with the user. After edits, update related material and have the reviewer check the changes again.
 
-For over-cut claims, require the named failure and evidence. "The rule no longer lives anywhere" is not evidence.
-
-When the runtime can provide a fresh isolated reviewer, use one after a substantial pass and give it the before/after artifacts without your defense of the changes. Treat its findings by the same evidence bar.
-
-## Done
-
-The pass is complete when:
-
-- every block in the target surface was considered;
-- every duplicated carrier affected by the decision is consistent;
-- no dependency points at removed behavior;
-- surviving instructions express real constraints rather than model babysitting;
-- every disputed removal has a concrete behavioral argument, not an archival one.
+The pass is complete when all four failure modes are absent, each finding has been addressed or rejected with a reason, and the reviewer has checked any resulting changes.

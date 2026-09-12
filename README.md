@@ -6,7 +6,7 @@ Portable skills for coding agents.
 
 - **approach-review** — challenges a proposed technical approach before implementation.
 - **implementation-review** — inspects the technical aspects of a completed implementation before acceptance or shipping.
-- **unhobble** — removes legacy instruction scaffolding that over-constrains stronger models.
+- **unhobble** — updates and simplifies context engineering for new, stronger models.
 
 Each skill is independently installable and self-contained within its folder.
 
@@ -36,7 +36,7 @@ skills/
 
 The two technical-review skills dispatch a fresh isolated reviewer using their bundled `agents/reviewer.md`. They work best in runtimes that can spawn an isolated subagent and optionally enforce a read-only boundary.
 
-`unhobble` has no runtime-specific dependencies. It operates on the instruction surfaces and repository state available to the agent using it.
+`unhobble` requires access to read and edit the target material and an independent reviewer.
 
 ## Technical review independence
 
